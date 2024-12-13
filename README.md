@@ -8,9 +8,9 @@
 
 - [pip](https://pip.pypa.io/en/stable/cli/pip_install/) 24.3.1+
 
-# Questão 1
-
 ![arquitetura.jpg](arquitetura.jpg)
+
+# Arquitetura da Solução
 
 ## Princípios de Design Adotados
 
@@ -23,7 +23,34 @@ A arquitetura projetada atende aos requisitos do desafio proposto, integrando ef
 - **Processamento em Tempo Real e Batch**: A integração de MSK e Lambda garante processamento contínuo para diferentes casos de uso.
 - **Abordagem Serverless**: paradigma serverless para simplificar a gestão da infraestrutura e oferecer escalabilidade automática.
 
-# Questão 2
+
+# Execução da aplicação
+
+Para essa domonstração, ambas as aplicações foram encapsuladas dentro do mesmo container. Em um cenário real, cada um das aplicações executariam em funções Lambda/ECS-Fargate separadamente. 
+
+Execução das aplicações via API HTTP request
+
+```sh
+curl http://localhost:5500/api/invoices?months=3,6
+```
+
+```sh
+curl http://localhost:5500/api/chatbot
+```
+
+Execução das aplicações via container
+
+```shell
+docker build -t meta-message-app .
+```
+
+```shell
+docker run -p 5500:5500 meta-message-app
+```
+
+# Execução dos scripts brutos
+
+## Questão 2
 
 ```sh
 python question_2.py data/invoices.csv 2020-01-01
@@ -33,7 +60,7 @@ Output:
 
 ![output_2.jpg](img/output_2.jpg)
 
-# Questão 3
+## Questão 3
 
 ```sh
 python3 question_3.py --files data/hour=13.json data/hour=14.json --customer C2000
